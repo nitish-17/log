@@ -26,13 +26,8 @@ export default defineConfig({
           {
             src: 'icon.svg',
             sizes: '512x512',
-            type: 'image/svg+xml'
-          },
-          {
-            src: 'icon.svg',
-            sizes: '512x512',
             type: 'image/svg+xml',
-            purpose: 'any maskable'
+            purpose: 'any'
           }
         ]
       }

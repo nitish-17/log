@@ -22,14 +22,18 @@
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+  overscroll-behavior-y: none;
+  background-color: var(--bg-color);
+}
+
 body {
   font-family: var(--font-family);
-  background-color: var(--bg-color);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
-  overscroll-behavior-y: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   color-scheme: dark;
