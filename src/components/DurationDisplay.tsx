@@ -25,24 +25,23 @@ export const DurationDisplay: React.FC<DurationDisplayProps> = ({ seconds }) => 
         .duration-display {
           display: flex;
           align-items: center;
+          justify-content: center;
           padding: 0.25rem 0;
           height: 24px;
           position: relative;
-          margin-left: 22.5px; /* Aligned with timeline line */
-          transform: translateX(-50%);
-          width: fit-content;
+          width: 100%;
         }
 
         .duration-text {
-          font-size: 0.65rem;
-          color: #ffb100; /* Amber */
+          font-size: 0.85rem;
+          color: #777777;
           background-color: var(--bg-color);
-          padding: 0 0.5rem;
+          padding: 0 0.75rem;
           z-index: 2;
-          font-weight: 600;
+          font-weight: 700;
           letter-spacing: 0.05em;
           white-space: nowrap;
-          text-shadow: 0 0 8px rgba(255, 177, 0, 0.4);
+          opacity: 0.5;
         }
       `}</style>
     </div>

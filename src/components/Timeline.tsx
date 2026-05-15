@@ -6,9 +6,10 @@ import { type LogEntry } from '../db/db';
 interface TimelineProps {
   entries: LogEntry[];
   onLongPress: (entry: LogEntry) => void;
+  previousDayLastEntry?: LogEntry | null;
 }
 
-export const Timeline: React.FC<TimelineProps> = ({ entries, onLongPress }) => {
+export const Timeline: React.FC<TimelineProps> = ({ entries, onLongPress, previousDayLastEntry }) => {
   if (!entries || entries.length === 0) {
     return (
       <div className="empty-state">
@@ -27,6 +28,11 @@ export const Timeline: React.FC<TimelineProps> = ({ entries, onLongPress }) => {
         if (nextEntry) {
           const diffMs = entry.timestamp.getTime() - nextEntry.timestamp.getTime();
           durationSeconds = Math.floor(diffMs / 1000);
+        } else if (previousDayLastEntry) {
+          // If it's the last entry of the current list (oldest of the day)
+          // check if we have an entry from the previous day to show duration
+          const diffMs = entry.timestamp.getTime() - previousDayLastEntry.timestamp.getTime();
+          durationSeconds = Math.floor(diffMs / 1000);
         }
 
         return (
@@ -34,7 +40,7 @@ export const Timeline: React.FC<TimelineProps> = ({ entries, onLongPress }) => {
             <div className="timeline-item">
               <EntryCard entry={entry} onLongPress={onLongPress} />
             </div>
-            {nextEntry && (
+            {(nextEntry || (previousDayLastEntry && index === entries.length - 1)) && (
               <DurationDisplay seconds={durationSeconds} />
             )}
           </React.Fragment>
@@ -51,7 +57,7 @@ export const Timeline: React.FC<TimelineProps> = ({ entries, onLongPress }) => {
 
         .timeline-line {
           position: absolute;
-          left: 22.5px; /* Center of the 45px wide timestamp */
+          left: 32.5px; /* Center of the 65px wide timestamp */
           top: 2rem;
           bottom: 2rem;
           width: 0;

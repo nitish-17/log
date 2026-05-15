@@ -16,7 +16,7 @@ export default defineConfig({
         description: 'High-aesthetic daily logging',
         theme_color: '#0d1117',
         background_color: '#0d1117',
-        display: 'standalone',
+        display: 'fullscreen',
         icons: [
           {
             src: 'icon.svg',

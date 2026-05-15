@@ -24,24 +24,25 @@ export const FAB: React.FC<FABProps> = ({ onClick }) => {
           width: 56px;
           height: 56px;
           border-radius: 50%;
-          background-color: rgba(255, 255, 255, 0.03);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          background-color: rgba(255, 255, 255, 0.005);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
           color: var(--accent-blue);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: none;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-          transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+          transition: transform 0.2s, background-color 0.2s;
           z-index: 100;
+          opacity: 0.6;
         }
 
         .fab:hover {
           transform: scale(1.05);
-          background-color: rgba(255, 255, 255, 0.06);
-          border-color: rgba(255, 255, 255, 0.15);
+          background-color: rgba(255, 255, 255, 0.03);
+          opacity: 1;
         }
 
         .fab:active {

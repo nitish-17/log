@@ -3,9 +3,8 @@ import { Header } from './components/Header';
 import { FAB } from './components/FAB';
 import { BottomSheet } from './components/BottomSheet';
 import { Timeline } from './components/Timeline';
-import { useEntries } from './hooks/useEntries';
+import { useEntries, usePreviousDayLastEntry } from './hooks/useEntries';
 import { entriesService } from './db/service';
-import { seedMockData } from './utils/mockData';
 import { type LogEntry, type EntryType } from './db/db';
 
 function App() {
@@ -14,6 +13,7 @@ function App() {
   const [editingEntry, setEditingEntry] = useState<LogEntry | null>(null);
 
   const entries = useEntries(currentDate);
+  const previousDayLastEntry = usePreviousDayLastEntry(currentDate);
 
   const handleAddEntry = async (content: string, category: EntryType) => {
     if (editingEntry?.id) {
@@ -48,16 +48,8 @@ function App() {
         <Timeline 
           entries={entries || []} 
           onLongPress={handleLongPress} 
+          previousDayLastEntry={previousDayLastEntry}
         />
-        
-        {entries?.length === 0 && (
-          <button 
-            className="seed-button"
-            onClick={() => seedMockData()}
-          >
-            Seed Mock Data
-          </button>
-        )}
       </main>
 
       <FAB onClick={() => {
@@ -85,19 +77,6 @@ function App() {
           max-width: 600px;
           margin: 0 auto;
           width: 100%;
-        }
-
-        .seed-button {
-          display: block;
-          margin: 2rem auto;
-          background: var(--bg-secondary);
-          color: var(--text-secondary);
-          border: 1px solid var(--border-color);
-          padding: 0.5rem 1rem;
-          border-radius: 8px;
-          cursor: pointer;
-          font-family: var(--font-family);
-          font-size: 0.8rem;
         }
       `}</style>
     </>

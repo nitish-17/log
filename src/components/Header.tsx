@@ -8,10 +8,10 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ currentDate, onDateChange }) => {
   const formatDate = (date: Date) => {
-    const options: Intl.DateTimeFormatOptions = { 
-      weekday: 'short', 
-      month: 'short', 
-      day: 'numeric' 
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric'
     };
     return date.toLocaleDateString('en-US', options);
   };
@@ -30,14 +30,14 @@ export const Header: React.FC<HeaderProps> = ({ currentDate, onDateChange }) => 
   return (
     <header className="header">
       <button onClick={() => shiftDate(-1)} aria-label="Previous day">
-        <ChevronLeft size={20} />
+        <ChevronLeft size={20} color="var(--accent-blue)" />
       </button>
-      
+
       <div className="date-display">
         <span className="date-text">{formatDate(currentDate)}</span>
         {!isToday(currentDate) && (
-          <button 
-            className="today-button" 
+          <button
+            className="today-button"
             onClick={() => onDateChange(new Date())}
           >
             Today
@@ -46,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({ currentDate, onDateChange }) => 
       </div>
 
       <button onClick={() => shiftDate(1)} aria-label="Next day">
-        <ChevronRight size={20} />
+        <ChevronRight size={20} color="var(--accent-blue)" />
       </button>
 
       <style>{`
@@ -55,17 +55,18 @@ export const Header: React.FC<HeaderProps> = ({ currentDate, onDateChange }) => 
           align-items: center;
           justify-content: space-between;
           padding: 1rem;
-          background-color: var(--bg-color);
-          border-bottom: 1px solid var(--border-color);
+          background-color: rgba(255, 255, 255, 0.002);
+          backdrop-filter: blur(1px);
+          -webkit-backdrop-filter: blur(1px);
           position: sticky;
           top: 0;
           z-index: 10;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
 
         .header button {
           background: none;
           border: none;
-          color: var(--text-primary);
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -73,10 +74,12 @@ export const Header: React.FC<HeaderProps> = ({ currentDate, onDateChange }) => 
           padding: 0.5rem;
           border-radius: 50%;
           transition: background-color 0.2s;
+          opacity: 0.8;
         }
 
         .header button:hover {
-          background-color: var(--bg-secondary);
+          background-color: rgba(255, 255, 255, 0.03);
+          opacity: 1;
         }
 
         .date-display {
@@ -89,7 +92,7 @@ export const Header: React.FC<HeaderProps> = ({ currentDate, onDateChange }) => 
         .date-text {
           font-weight: 600;
           font-size: 1.1rem;
-          color: var(--text-primary);
+          color: var(--accent-blue);
         }
 
         .today-button {
@@ -99,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({ currentDate, onDateChange }) => 
           color: var(--accent-blue) !important;
           padding: 2px 8px !important;
           border-radius: 4px !important;
-          background: rgba(88, 166, 255, 0.1) !important;
+          background: rgba(59, 130, 246, 0.1) !important;
         }
       `}</style>
     </header>

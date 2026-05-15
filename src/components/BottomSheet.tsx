@@ -79,10 +79,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
           </div>
 
           <div className="action-bar">
-            <div className="left-actions">
-              <button type="button" className="action-btn void-btn" onClick={onClose} aria-label="Cancel">
-                <X size={24} />
-              </button>
+            <div className="delete-container">
               {isEditing && onDelete && (
                 <button type="button" className="action-btn delete-btn" onClick={() => {
                   if ('vibrate' in navigator) {
@@ -94,9 +91,16 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                 </button>
               )}
             </div>
-            <button type="submit" className="action-btn enter-btn" disabled={!content.trim()}>
-              <Check size={20} /> Enter
+
+            <button type="button" className="action-btn void-btn" onClick={onClose} aria-label="Cancel">
+              <X size={24} />
             </button>
+
+            <div className="enter-container">
+              <button type="submit" className="action-btn enter-btn" disabled={!content.trim()}>
+                <Check size={20} /> Enter
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -181,9 +185,9 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
         }
 
         .category-option.active {
-          border-color: var(--text-primary);
-          color: var(--text-primary);
-          background-color: rgba(255, 255, 255, 0.05);
+          border-color: transparent;
+          color: var(--accent-blue);
+          background-color: rgba(59, 130, 246, 0.1);
         }
 
         .category-option input {
@@ -197,15 +201,20 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
         }
 
         .action-bar {
-          display: flex;
-          justify-content: space-between;
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
           align-items: center;
+          width: 100%;
         }
 
-        .left-actions {
+        .delete-container {
           display: flex;
-          gap: 1.5rem;
-          align-items: center;
+          justify-content: flex-start;
+        }
+
+        .enter-container {
+          display: flex;
+          justify-content: flex-end;
         }
 
         .action-btn {
