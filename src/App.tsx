@@ -19,10 +19,10 @@ function App() {
     if (editingEntry?.id) {
       await entriesService.updateEntry(editingEntry.id, content, category);
     } else {
-      const timestamp = new Date(currentDate);
       const now = new Date();
-      timestamp.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
-      await entriesService.addEntry(content, category, timestamp);
+      await entriesService.addEntry(content, category, now);
+      // Auto-navigate to today to see the new entry
+      setCurrentDate(new Date());
     }
     setEditingEntry(null);
   };
