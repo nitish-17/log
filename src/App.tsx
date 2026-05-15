@@ -73,7 +73,7 @@ function App() {
       <style>{`
         .timeline-container {
           flex: 1;
-          padding: 1rem;
+          padding: 1rem 1rem 1rem 0.6rem;
           max-width: 600px;
           margin: 0 auto;
           width: 100%;

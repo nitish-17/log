@@ -57,7 +57,7 @@ export const Timeline: React.FC<TimelineProps> = ({ entries, onLongPress, previo
 
         .timeline-line {
           position: absolute;
-          left: 32.5px; /* Center of the 65px wide timestamp */
+          left: 40px; /* Center of the 80px wide timestamp */
           top: 2rem;
           bottom: 2rem;
           width: 0;

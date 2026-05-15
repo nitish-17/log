@@ -97,8 +97,8 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
             </button>
 
             <div className="enter-container">
-              <button type="submit" className="action-btn enter-btn" disabled={!content.trim()}>
-                <Check size={20} /> Enter
+              <button type="submit" className="action-btn enter-btn" disabled={!content.trim()} aria-label="Commit">
+                <Check size={24} />
               </button>
             </div>
           </div>
@@ -169,6 +169,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
         .category-selector {
           display: flex;
           gap: 0.75rem;
+          justify-content: center;
         }
 
         .category-option {
@@ -177,11 +178,12 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
           gap: 0.5rem;
           padding: 0.5rem 1rem;
           border-radius: 20px;
-          border: 1px solid var(--border-color);
+          border: none;
           font-size: 0.85rem;
           cursor: pointer;
           transition: all 0.2s;
           color: var(--text-secondary);
+          background-color: rgba(255, 255, 255, 0.03);
         }
 
         .category-option.active {
@@ -221,36 +223,46 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 0.5rem;
-          padding: 0.6rem 1.2rem;
-          border-radius: 8px;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
           border: none;
           font-family: var(--font-family);
-          font-weight: 500;
           cursor: pointer;
-          transition: opacity 0.2s;
+          transition: all 0.2s;
+        }
+
+        .action-btn:disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
         }
 
         .void-btn {
-          background-color: transparent;
+          background-color: rgba(255, 255, 255, 0.05);
           color: var(--text-secondary);
-          padding: 0.5rem;
+        }
+
+        .void-btn:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          color: var(--text-primary);
         }
 
         .delete-btn {
           background-color: rgba(255, 68, 68, 0.1);
           color: #ff4444;
-          padding: 0.5rem;
+        }
+
+        .delete-btn:hover {
+          background-color: rgba(255, 68, 68, 0.2);
         }
 
         .enter-btn {
-          background-color: var(--accent-blue);
-          color: white;
+          background-color: rgba(59, 130, 246, 0.1);
+          color: var(--accent-blue);
         }
 
-        .enter-btn:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
+        .enter-btn:not(:disabled):hover {
+          background-color: rgba(59, 130, 246, 0.2);
         }
       `}</style>
     </div>

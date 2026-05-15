@@ -15,8 +15,7 @@ export const EntryCard: React.FC<EntryCardProps> = ({ entry, onLongPress }) => {
       minute: '2-digit',
       hour12: true,
     });
-    // Convert "h:mm AM/PM" to "h:mm a/p"
-    return timeStr.replace(/\s(AM|PM)/i, (match) => match.trim()[0].toLowerCase());
+    return timeStr.toLowerCase();
   };
 
   const handleStart = () => {
@@ -79,13 +78,13 @@ export const EntryCard: React.FC<EntryCardProps> = ({ entry, onLongPress }) => {
         .entry-meta {
           display: flex;
           align-items: center;
-          min-width: 65px;
+          min-width: 80px;
         }
 
         .timestamp {
           font-size: 0.85rem;
           font-weight: 500;
-          min-width: 65px;
+          min-width: 80px;
           background-color: var(--bg-color);
           padding: 0.25rem 0;
           z-index: 2;

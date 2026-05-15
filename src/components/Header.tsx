@@ -54,7 +54,7 @@ export const Header: React.FC<HeaderProps> = ({ currentDate, onDateChange }) => 
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 1rem;
+          padding: 1rem 1rem 1rem 0.6rem;
           background-color: rgba(255, 255, 255, 0.002);
           backdrop-filter: blur(1px);
           -webkit-backdrop-filter: blur(1px);

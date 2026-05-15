@@ -9,7 +9,6 @@
       <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="100" fill="#0d1117"/>
   <g filter="url(#glow)">
     <path d="M256 120V320M256 320L176 240M256 320L336 240" stroke="#58a6ff" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M120 392H392" stroke="#58a6ff" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
