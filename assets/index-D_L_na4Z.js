@@ -11,14 +11,11 @@ Error generating stack: `+e.message+`
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 1rem 1rem 1rem 0.6rem;
-          background-color: rgba(255, 255, 255, 0.002);
-          backdrop-filter: blur(1px);
-          -webkit-backdrop-filter: blur(1px);
+          padding: 1rem;
+          padding-top: calc(1rem + env(safe-area-inset-top));
           position: sticky;
           top: 0;
           z-index: 10;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
 
         .header button {
