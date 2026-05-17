@@ -1,6 +1,6 @@
 import Dexie, { type Table } from 'dexie';
 
-export type EntryType = 'Note' | 'Task' | 'Event';
+export type EntryType = 'Note';
 
 export interface LogEntry {
   id?: number;
@@ -14,8 +14,12 @@ export class LogDatabase extends Dexie {
 
   constructor() {
     super('LogDatabase');
-    this.version(1).stores({
-      entries: '++id, timestamp, category'
+    this.version(2).stores({
+      entries: '++id, timestamp'
+    }).upgrade(tx => {
+      return tx.table('entries').toCollection().modify(entry => {
+        entry.category = 'Note';
+      });
     });
   }
 }

@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Trash2, X, Check } from 'lucide-react';
-import { type EntryType } from '../db/db';
 
 interface BottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (content: string, category: EntryType) => void;
+  onSubmit: (content: string) => void;
   onDelete?: () => void;
   initialContent?: string;
-  initialCategory?: EntryType;
   isEditing?: boolean;
 }
 
@@ -18,20 +16,24 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
   onSubmit,
   onDelete,
   initialContent = '',
-  initialCategory = 'Note',
   isEditing = false,
 }) => {
   const [content, setContent] = useState(initialContent);
-  const [category, setCategory] = useState<EntryType>(initialCategory);
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen);
+    if (isOpen) {
+      setContent(initialContent);
+    }
+  }
 
   useEffect(() => {
     if (isOpen) {
-      setContent(initialContent);
-      setCategory(initialCategory);
       setTimeout(() => textareaRef.current?.focus(), 100);
     }
-  }, [isOpen, initialContent, initialCategory]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -41,7 +43,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
       if ('vibrate' in navigator) {
         navigator.vibrate([10, 30, 10]);
       }
-      onSubmit(content.trim(), category);
+      onSubmit(content.trim());
       onClose();
     }
   };
@@ -61,22 +63,6 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
             placeholder="What's happening?"
             className="entry-input"
           />
-
-          <div className="category-selector">
-            {(['Note', 'Task', 'Event'] as EntryType[]).map((type) => (
-              <label key={type} className={`category-option ${category === type ? 'active' : ''}`}>
-                <input
-                  type="radio"
-                  name="category"
-                  value={type}
-                  checked={category === type}
-                  onChange={() => setCategory(type)}
-                />
-                <span className="category-dot" style={{ backgroundColor: `var(--color-${type.toLowerCase()})` }} />
-                {type}
-              </label>
-            ))}
-          </div>
 
           <div className="action-bar">
             <div className="delete-container">
@@ -164,42 +150,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
           font-size: 1rem;
           resize: none;
           outline: none;
-        }
-
-        .category-selector {
-          display: flex;
-          gap: 0.75rem;
-          justify-content: center;
-        }
-
-        .category-option {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          border: none;
-          font-size: 0.85rem;
-          cursor: pointer;
-          transition: all 0.2s;
-          color: var(--text-secondary);
-          background-color: rgba(255, 255, 255, 0.03);
-        }
-
-        .category-option.active {
-          border-color: transparent;
-          color: var(--accent-blue);
-          background-color: rgba(59, 130, 246, 0.1);
-        }
-
-        .category-option input {
-          display: none;
-        }
-
-        .category-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
+          white-space: pre-wrap;
         }
 
         .action-bar {

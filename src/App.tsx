@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Header } from './components/Header';
-import { FAB } from './components/FAB';
+import { EntryInputBar } from './components/EntryInputBar';
 import { BottomSheet } from './components/BottomSheet';
 import { Timeline } from './components/Timeline';
 import { useEntries, usePreviousDayLastEntry } from './hooks/useEntries';
 import { entriesService } from './db/service';
-import { type LogEntry, type EntryType } from './db/db';
+import { type LogEntry } from './db/db';
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -15,14 +15,16 @@ function App() {
   const entries = useEntries(currentDate);
   const previousDayLastEntry = usePreviousDayLastEntry(currentDate);
 
-  const handleAddEntry = async (content: string, category: EntryType) => {
+  const handleAddEntry = async (content: string) => {
+    const now = new Date();
+    await entriesService.addEntry(content, 'Note', now);
+    // Auto-navigate to today to see the new entry
+    setCurrentDate(new Date());
+  };
+
+  const handleUpdateEntry = async (content: string) => {
     if (editingEntry?.id) {
-      await entriesService.updateEntry(editingEntry.id, content, category);
-    } else {
-      const now = new Date();
-      await entriesService.addEntry(content, category, now);
-      // Auto-navigate to today to see the new entry
-      setCurrentDate(new Date());
+      await entriesService.updateEntry(editingEntry.id, content, 'Note');
     }
     setEditingEntry(null);
   };
@@ -52,10 +54,7 @@ function App() {
         />
       </main>
 
-      <FAB onClick={() => {
-        setEditingEntry(null);
-        setIsSheetOpen(true);
-      }} />
+      <EntryInputBar onSubmit={handleAddEntry} />
 
       <BottomSheet
         isOpen={isSheetOpen}
@@ -63,17 +62,16 @@ function App() {
           setIsSheetOpen(false);
           setEditingEntry(null);
         }}
-        onSubmit={handleAddEntry}
+        onSubmit={handleUpdateEntry}
         onDelete={handleDelete}
         initialContent={editingEntry?.content}
-        initialCategory={editingEntry?.category}
         isEditing={!!editingEntry}
       />
 
       <style>{`
         .timeline-container {
           flex: 1;
-          padding: 1rem 1rem 1rem 0.6rem;
+          padding: 1rem 1rem 80px 0.6rem; /* Extra bottom padding for input bar */
           max-width: 600px;
           margin: 0 auto;
           width: 100%;

@@ -13,7 +13,6 @@ export const Timeline: React.FC<TimelineProps> = ({ entries, onLongPress, previo
   if (!entries || entries.length === 0) {
     return (
       <div className="empty-state">
-        <p>No logs for this day.</p>
       </div>
     );
   }

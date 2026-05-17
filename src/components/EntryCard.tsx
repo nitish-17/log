@@ -44,7 +44,7 @@ export const EntryCard: React.FC<EntryCardProps> = ({ entry, onLongPress }) => {
 
   return (
     <div
-      className={`entry-card-container ${entry.category.toLowerCase()}`}
+      className="entry-card-container note"
       onMouseDown={handleStart}
       onMouseUp={handleEnd}
       onMouseLeave={handleEnd}
@@ -89,11 +89,8 @@ export const EntryCard: React.FC<EntryCardProps> = ({ entry, onLongPress }) => {
           padding: 0.25rem 0;
           z-index: 2;
           text-align: center;
+          color: var(--color-note);
         }
-
-        .note .timestamp { color: var(--color-note); }
-        .task .timestamp { color: var(--color-task); }
-        .event .timestamp { color: var(--color-event); }
 
         .entry-content-card {
           flex: 1;
@@ -101,6 +98,8 @@ export const EntryCard: React.FC<EntryCardProps> = ({ entry, onLongPress }) => {
           font-size: 0.95rem;
           line-height: 1.4;
           color: var(--text-primary);
+          white-space: pre-wrap;
+          word-break: break-word;
         }
 
         .entry-card-container:active .entry-content-card {

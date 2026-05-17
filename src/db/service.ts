@@ -35,5 +35,9 @@ export const entriesService = {
       .between(startOfDay, endOfDay)
       .reverse()
       .toArray();
+  },
+
+  async purgeAllData() {
+    return await db.entries.clear();
   }
 };
